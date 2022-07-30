@@ -56,6 +56,8 @@
     <h3 class="article-section-heading">4. Try to use limited number of WebSockets</h3>
     <p>One WebSocket connection should generally be enough for most use cases especially if you send stringified json data instead of plain strings, you should avoid using multiple WebSocket connections unless you have to for example in case where you need to send a large amount of data and one connection is not enough. WebSockets come at a cost, whether that is making your own application more complicated or more load on the server. I'd suggest making a singleton class for WebSocket and using that across your application.</p>
 
+    <p>I learned these useful things while working with websockets, keeping them in mind while you use them for your own project could help you avoid some headache by avoiding some mistakes made while using them.</p>
+
 </body>
 
 </html>
