@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Siddhanta Gupta | Virtual PT</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/article.css" />
+  </head>
+
+  <body class="is-preload">
+    <!-- header start -->
+    <header id="header-bar">
+      <div id="header-bar-left">
+        <a
+          href="https://siddhantagupta.github.io"
+          class="image avatar"
+          target="_blank"
+          ><img src="../images/avatar.jpg" alt=""
+        /></a>
+        <h3 class="no-margin">
+          <a href="https://siddhantagupta.github.io" target="_blank"
+            >Siddhanta Gupta</a
+          >
+        </h3>
+      </div>
+
+      <div id="header-bar-center"></div>
+
+      <div id="header-bar-right">
+        <ul class="icons no-margin">
+          <li>
+            <a
+              href="https://github.com/SiddhantaGupta"
+              target="_blank"
+              class="icon brands fa-github"
+              ><span class="label">Github</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/siddhantagupta"
+              target="_blank"
+              class="icon brands fa-linkedin"
+              ><span class="label">LinkedIn</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/realsiddhanta/"
+              target="_blank"
+              class="icon brands fa-instagram"
+              ><span class="label">Instagram</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/RealSiddhanta"
+              target="_blank"
+              class="icon brands fa-twitter"
+              ><span class="label">Twitter</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="mailto:siddhanta.sg@gmail.com"
+              target="_blank"
+              class="icon solid fa-envelope"
+              ><span class="label">Email</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <h1 class="article-title">Virtual PT</h1>
+    <h2 class="article-subtitle">Python | Mediapipe | Docker | AWS</h2>
+
+    <img src="../images/fulls/dr_reddy.jpg" class="article-image" />
+
+    <h3 class="article-section-heading">Introduction</h3>
+    <p>
+      A python module to analyze videos/images and gather data of human pose and
+      hand positioning at different stages of an exercise.
+    </p>
+
+    <h3 class="article-section-heading">Module</h3>
+    <p>
+      Developed a python module using Google's Mediapipe library to gather data
+      of all the angles for the body and hand from a given video/image to
+      calculate angles of all joints during different stages of the exercise.
+    </p>
+
+    <h3 class="article-section-heading">Deployment</h3>
+    <p>
+      Deployed docker image on AWS ECR and as an AWS Lambda container using the
+      aws cli. The module had to be dockerized and deployed as a container as
+      the module size was bigger than the base 50MB limit of lambda. lambda
+      containers have a limit of 10GB.
+    </p>
+
+    <h3 class="article-section-heading">Tech Stack</h3>
+    <p>Python / Mediapipe / Docker / AWS - ECR | Lambda</p>
+  </body>
+</html>
