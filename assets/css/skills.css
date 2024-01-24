@@ -1,15 +1,11 @@
 .skills {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .skill {
-    flex: 33%;
-    margin: 10px 0px;
-}
-
-.skill-label {
-    margin: 0px;
+    flex: 30%;
+    margin: 10px 10px;
 }
