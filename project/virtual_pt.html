@@ -42,30 +42,6 @@
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/siddhantagupta"
-              target="_blank"
-              class="icon brands fa-linkedin"
-              ><span class="label">LinkedIn</span></a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/realsiddhanta/"
-              target="_blank"
-              class="icon brands fa-instagram"
-              ><span class="label">Instagram</span></a
-            >
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/RealSiddhanta"
-              target="_blank"
-              class="icon brands fa-twitter"
-              ><span class="label">Twitter</span></a
-            >
-          </li>
-          <li>
-            <a
               href="mailto:siddhanta.sg@gmail.com"
               target="_blank"
               class="icon solid fa-envelope"
@@ -77,10 +53,13 @@
     </header>
     <!-- header end -->
 
-    <h1 class="article-title">Virtual PT</h1>
+    <h1 class="article-title">Dr. Reddy's Virtual PT</h1>
     <h2 class="article-subtitle">Python | Mediapipe | Docker | AWS</h2>
 
     <img src="../images/fulls/dr_reddy.jpg" class="article-image" />
+
+    <h3 class="article-section-heading">Preview</h3>
+    <p>Unavailable - I completed my work on the project and was moved before it was completed and deployed, I am unaware if this project saw the light of day.</p> 
 
     <h3 class="article-section-heading">Introduction</h3>
     <p>
@@ -88,20 +67,14 @@
       hand positioning at different stages of an exercise.
     </p>
 
-    <h3 class="article-section-heading">Module</h3>
-    <p>
-      Developed a python module using Google's Mediapipe library to gather data
-      of all the angles for the body and hand from a given video/image to
-      calculate angles of all joints during different stages of the exercise.
-    </p>
-
-    <h3 class="article-section-heading">Deployment</h3>
-    <p>
-      Deployed docker image on AWS ECR and as an AWS Lambda container using the
-      aws cli. The module had to be dockerized and deployed as a container as
-      the module size was bigger than the base 50MB limit of lambda. lambda
-      containers have a limit of 10GB.
-    </p>
+    <h3 class="article-section-heading">Contribution</h3>
+    <ul>
+      <li>Implemented Image and Video processing to calculate angles of joints in human body using Mediapipe's holistic solution for pose and hand.</li>
+      <li>Developed AWS lambda to transcode vidoes to m3u8 streams using AWS MediaConvert for storage.</li>
+      <li>Developed lambda function for splitting videos using MoviePy and ffmpeg.</li>
+      <li>Developed AWS lambda to compress images for storage using Python Imaging Library (PIL).</li>
+      <li>Deployed the lambda functions as a lambda container using Docker, AWS ECR and AWS lambda.</li>
+    </ul>
 
     <h3 class="article-section-heading">Tech Stack</h3>
     <p>Python / Mediapipe / Docker / AWS - ECR | Lambda</p>

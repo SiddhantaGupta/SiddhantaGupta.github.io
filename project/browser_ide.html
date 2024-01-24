@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Siddhanta Gupta | Browser IDE</title>
+    <title>Siddhanta Gupta | Digimaker Web IDE</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -24,33 +24,36 @@
         <div id="header-bar-right">
             <ul class="icons no-margin">
                 <li><a href="https://github.com/SiddhantaGupta" target="_blank" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                <li><a href="https://www.linkedin.com/in/siddhantagupta" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                <li><a href="https://www.instagram.com/realsiddhanta/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="https://twitter.com/RealSiddhanta" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="mailto:siddhanta.sg@gmail.com" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
             </ul>
         </div>
     </header>
     <!-- header end -->
     
-    <h1 class="article-title">Browser Based IDE</h1>
+    <h1 class="article-title">Digimaker Web IDE</h1>
     <h2 class="article-subtitle">MERN Stack | AWS</h2>
     
     <img src="../images/fulls/browser_ide.png" class="article-image" />
 
+    <h3 class="article-section-heading">Preview</h3>
+    <p>Visit <a href="https://code.digimaker.com.au" target="_blank">Digimaker</a> <img src="../images/icons/open_new_tab_icon.svg" class="new-tab-icon" /> to view the app. Login creds are provided directly to students who <a href="https://www.digimaker.com.au/enrol" target="_blank">enroll</a> <img src="../images/icons/open_new_tab_icon.svg" class="new-tab-icon" />.</p>
+    
+
     <h3 class="article-section-heading">Introduction</h3>
     <p>This is an IDE that can be accessed from the browser, no need for installation, save your code in the cloud, access it from any computer, and code on the go.</p>
 
-    <h3 class="article-section-heading">Frontend</h3>
-    <p>I developed the frontend using React.js and it was a considerable challenge to develop as it included a lot of complex componenets that had to be developed from scratch. Some of the most complex parts of the frontend were the file directory and the object structure used to contain the code files and link the directory to the editor.</p>
-
-    <h3 class="article-section-heading">Backend</h3>
-    <p>For the backend APIs I chose to go with Node and Express and the DBMS I used is MongoDB. Figuring out how to maintain state for shell connections and link them to the frontend was a big challenge. I decided to use a websocket connection to achieve this, as the websockets maintain state and hold the connection open.</p>
-
-    <h3 class="article-section-heading">Deployment</h3>
-    <p>AWS was used for hosting, as it's a one step solution for hosting a full stack app and provides a lot of other useful services in one bundle</p>
-    <p>The frontend was hosted using static site hosting on S3 Buckets, and distributed using CloudFront CDN.</p>
-    <p>The backend was hosted on EC2 servers with an AWS Load Balancer sitting in front of it for scalability, the userfiles were stored in S3 and AWS CloudWatch was used to moniter the state of the servers and to get notified in case anything goes down.</p>
+    <h3 class="article-section-heading">Contribution</h3>
+    <ul>
+        <li>Developed IDE UI, code execution backend, real time shell integration, storage module and others.</li>
+        <li>Designed database schemas.</li>
+        <li>Modified open-source libraries and web apps like Skulpt, MIT's Scratch GUI, and Microsoft's small basic to fit the need of the project and communicate with internal systems.</li>
+        <li>Fixed major security issues - isolated server filesystem from the user shell using docker.</li>
+        <li>Created Bash scripts to automate tasks like spinning docker containers for user shells.</li>
+        <li>Suggested and did major refactors to improve API routing and versioning.</li>
+        <li>Improved API and Database logging.</li>
+        <li>Created Admin dashboard Pages.</li>
+        <li>Deployed the entire project on AWS.</li>
+    </ul>
 
     <h3 class="article-section-heading">Tech Stack</h3>
     <p>React.js / Node.js / Express.js / MongoDB / AWS - S3 | CloudFront | EC2 | LoadBalancer | CloudWatch</p>
