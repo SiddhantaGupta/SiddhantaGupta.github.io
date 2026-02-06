@@ -2,59 +2,103 @@
 <html lang="en">
 
 <head>
-    <title>How to use WebSockets like a pro</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <link rel="stylesheet" href="../assets/css/article.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use WebSockets Like a Pro | Siddhanta Gupta</title>
+    <meta name="description"
+        content="A collection of tips and tricks for using WebSockets more effectively - timeouts, JSON data, efficiency tips, and connection management.">
+
+    <link rel="stylesheet" href="../styles/blog.css">
 </head>
 
-<body class="is-preload">
-
-    <!-- header start -->
-    <header id="header-bar">
-        <div id="header-bar-left">
-            <a href="https://siddhantagupta.github.io" class="image avatar" target="_blank"><img src="../images/avatar.jpg" alt="" /></a>
-            <h3 class="no-margin"><a href="https://siddhantagupta.github.io" target="_blank">Siddhanta Gupta</a></h3>
-        </div>
-
-        <div id="header-bar-center">
-        </div>
-
-        <div id="header-bar-right">
-            <ul class="icons no-margin">
-                <li><a href="https://github.com/SiddhantaGupta" target="_blank" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                <li><a href="mailto:siddhanta.sg@gmail.com" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="blog-header-inner">
+            <div class="blog-header-left">
+                <div class="blog-avatar">
+                    <img src="../assets/images/avatar.jpg" alt="Siddhanta Gupta">
+                </div>
+                <div class="blog-author-name">
+                    <a href="../index.html">Siddhanta Gupta</a>
+                </div>
+            </div>
+            <div class="blog-header-right">
+                <a href="https://github.com/SiddhantaGupta" target="_blank" rel="noopener"
+                    class="blog-header-link">GitHub</a>
+                <a href="mailto:siddhanta.sg@gmail.com" class="blog-header-link">Email</a>
+            </div>
         </div>
     </header>
-    <!-- header end -->
 
-    <h1 class="article-title">How to use WebSockets like a pro</h1>
-    <h2 class="article-subtitle">A collection of tips and tricks for using WebSockets more effectively that I observed while working with them.</h2>
+    <!-- Article -->
+    <main class="blog-container">
+        <article>
+            <!-- Hero -->
+            <header class="article-hero">
+                <p class="article-meta">cat websockets.md</p>
+                <h1 class="article-title">How to Use WebSockets Like a Pro</h1>
+                <p class="article-subtitle">A collection of tips and tricks for using WebSockets more effectively that I
+                    observed while working with them.</p>
+            </header>
 
-    <img src="../images/fulls/web_sockets.jpg" class="article-image" />
+            <!-- Content -->
+            <div class="article-body">
+                <h2>Introduction</h2>
+                <p>There are various articles that provide all the information you need to know about what WebSockets
+                    are and how to set up a WebSocket connection. This article instead discusses some tips and best
+                    practices on how to use WebSockets and talks about some hidden mechanisms surrounding them that I
+                    generally don't see mentioned in articles on WebSockets.</p>
 
-    <h3 class="article-section-heading">Introduction</h3>
-    <p>There are various articles that provide all the information you need to know about what WebSockets are and how to set up a WebSocket connection. This article instead discusses some tips and best practices on how to use WebSockets and talks about some hidden mechanisms surrounding them that I generally don't see mentioned in articles on WebSockets.</p>
+                <h2>Why use WebSockets?</h2>
+                <p>WebSockets are very useful, not only do they provide a way to have a continuous stateful connection
+                    on the web between the client and the server, they also allow the server to communicate with the
+                    client without receiving any request, although the initial connection can only be opened by the
+                    client - both of these are not possible with an HTTP connection.</p>
 
-    <h3 class="article-section-heading">Why use WebSockets?</h3>
-    <p>WebSockets are very useful, not only do they provide a way to have a continuous stateful connection on the web between the client and the server, they also allow the server to communicate with the client without receiving any request, although the initial connection can only be opened by the client - both of these are not possible with an HTTP connection.</p>
+                <h3>1. WebSockets timeout after one minute of dormancy</h3>
+                <p>WebSocket connections usually timeout and disconnect if no data has been exchanged between the client
+                    and the server for 60 seconds. If you need to keep the connection open at all times you can easily
+                    deal with that problem by implementing a heartbeat type solution where every 55 seconds or whatever
+                    time frame works for you, you send a <code>"ping"</code> to the server and the server responds with
+                    a <code>"pong"</code>. Otherwise, if it's not necessary to keep the connection open at all times,
+                    just check if the connection is open every time you have to send data and re-establish a new
+                    connection if it's been closed.</p>
 
-    <h3 class="article-section-heading">1. WebSockets timeout after one minute of dormancy</h3>
-    <p>WebSocket connections usually timeout and disconnect if no data has been exchanged between the client and the server for 60 seconds. If you need to keep the connection open at all times you can easily deal with that problem by implementing a heartbeat type solution where every 55 seconds or whatever time frame works for you, you send a "ping" to the server and the server responds with a "pong". Otherwise, if it's not necessary to keep the connection open at all times, just check if the connection is open every time you have to send data and re-establish a new connection if it's been closed.</p>
+                <h3>2. Send stringified JSON objects instead of plain strings</h3>
+                <p>You can send text (strings) or binary data through WebSockets, in case you are sending strings don't
+                    make the same mistake I made when using WebSockets for the first time around. Instead of sending
+                    normal strings send stringified JSON objects which will allow you to send more complex data than
+                    just plain strings, which can be useful on the server side for a lot of different things, even if
+                    sending strings works for the application initially, chances are your application is gonna grow and
+                    will need to be able to deal with more complex data, it will save you the headache of changing
+                    existing code later in case you want to do something more with your data.</p>
 
-    <h3 class="article-section-heading">2. Send stringified json objects instead of plain strings</h3>
-    <p>You can send text (strings) or binary data through WebSockets, in case you are sending strings don't make the same mistake I made when using WebSockets for the first time around. Instead of sending normal strings send stringified json objects which will allow you to send more complex data than just plain strings, which can be useful on the server side for a lot of different things, even if sending strings works for the application initially, chances are your application is gonna grow and will need to be able to deal with more complex data, it will save you the headache of changing existing code later in case you want to do something more with your data.</p>
+                <h3>3. WebSockets are more efficient if you frequently need to transfer data</h3>
+                <p>WebSockets require less overhead of data per network request. WebSockets only send headers when they
+                    first open a connection, every request sent after that only transfers the payload, whereas in HTTP
+                    you send the headers each time you send a request.</p>
 
-    <h3 class="article-section-heading">3. WebSockets are more efficient if you frequently need to transfer data</h3>
-    <p>WebSockets require less overhead of data per network request. WebSockets only send headers when they first open a connection, every request sent after that only transfers the payload, whereas in HTTP you send the headers each time you send a request.</p>
+                <h3>4. Try to use a limited number of WebSockets</h3>
+                <p>One WebSocket connection should generally be enough for most use cases especially if you send
+                    stringified JSON data instead of plain strings, you should avoid using multiple WebSocket
+                    connections unless you have to for example in case where you need to send a large amount of data and
+                    one connection is not enough. WebSockets come at a cost, whether that is making your own application
+                    more complicated or more load on the server. I'd suggest making a singleton class for WebSocket and
+                    using that across your application.</p>
 
-    <h3 class="article-section-heading">4. Try to use limited number of WebSockets</h3>
-    <p>One WebSocket connection should generally be enough for most use cases especially if you send stringified json data instead of plain strings, you should avoid using multiple WebSocket connections unless you have to for example in case where you need to send a large amount of data and one connection is not enough. WebSockets come at a cost, whether that is making your own application more complicated or more load on the server. I'd suggest making a singleton class for WebSocket and using that across your application.</p>
+                <p>I learned these useful things while working with WebSockets, keeping them in mind while you use them
+                    for your own project could help you avoid some headache by avoiding some mistakes made while using
+                    them.</p>
+            </div>
 
-    <p>I learned these useful things while working with websockets, keeping them in mind while you use them for your own project could help you avoid some headache by avoiding some mistakes made while using them.</p>
-
+            <!-- Footer -->
+            <footer class="blog-footer">
+                <a href="../index.html#blog" class="back-link">Back to portfolio</a>
+                <p class="blog-footer-text">© 2026 Siddhanta Gupta</p>
+            </footer>
+        </article>
+    </main>
 </body>
 
 </html>

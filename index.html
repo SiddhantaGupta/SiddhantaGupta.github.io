@@ -1,225 +1,502 @@
-<!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Siddhanta Gupta</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/skills.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-					<h1><strong>I am Siddhanta</strong><br style="display: block;" />
-						An enthusiastic web developer<br style="display: block;">
-					</h1>
-				</div>
-			</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhanta Gupta | Software Engineer</title>
+    <meta name="description"
+        content="Software Engineer specializing in full-stack development, cloud architecture, and scalable web applications. Expertise in React, Node.js, Python, and AWS infrastructure.">
 
-		<!-- Main -->
-			<div id="main">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Siddhanta Gupta | Software Engineer">
+    <meta property="og:description"
+        content="Software Engineer building production-grade applications with modern web technologies and cloud infrastructure">
+    <meta property="og:type" content="website">
 
-				<!-- About me -->
-					<section id="one">
-						<header class="major">
-							<h2>About Me</h2>
-						</header>
-						<p>I am a Self-taught software engineer with a passion for programming, learning and developing elegant software.</p>
-					</section>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/components.css">
+</head>
 
-				<!-- Two -->
-					<section id="two">
+<body>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span class="prompt">siddhanta</span><span class="text-muted">@portfolio</span><span
+                    class="text-accent">:~$</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">./about</a></li>
+                    <li><a href="#projects" class="nav-link">./projects</a></li>
+                    <li><a href="#skills" class="nav-link">./skills</a></li>
 
-						<!-- FOSS Projects -->
+                    <li><a href="#contact" class="nav-link">./contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-						<h2>Free and Open Source Software</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/personal/windows-workspaces.html" target="_blank" class="image fit thumb"><img src="images/fulls/windows-workspaces.png" alt="" /></a>
-								<h3>
-									<a href="./projects/personal/windows-workspaces.html" target="_blank">
-										Windows Workspaces <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>An AutoHotKey script that provides i3wm (linux) style keybinds and functionality on windows.</p>
-							</article>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="terminal-card hero-terminal">
+                    <div class="terminal-card-header">
+                        <div class="terminal-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="terminal-card-title">whoami</span>
+                    </div>
+                    <div class="terminal-card-body hero-content">
+                        <div class="hero-text">
+                            <p class="hero-prompt"><span class="prompt">whoami</span></p>
+                            <h1 class="hero-name"><span class="output-arrow">></span> Siddhanta Gupta</h1>
+                            <p class="hero-role"><span class="output-arrow">></span> Software Engineer</p>
+                            <p class="hero-tagline"><span class="output-arrow">></span> <span
+                                    class="text-muted">Architecting scalable systems with clean code and modern
+                                    infrastructure</span>
+                            </p>
+                        </div>
+                        <div class="hero-actions">
+                            <a href="https://github.com/SiddhantaGupta" target="_blank" rel="noopener"
+                                class="hero-link">
+                                <span class="prompt">git</span> remote -v <span class="text-muted"># GitHub</span>
+                            </a>
+                            <a href="mailto:siddhanta.sg@gmail.com" class="hero-link">
+                                <span class="prompt">mail</span> -s "Hello" <span class="text-muted"># Email</span>
+                            </a>
+                            <a href="resume.html" class="hero-link">
+                                <span class="prompt">cat</span> resume.pdf <span class="text-muted"># Resume</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/personal/expressjs-boilerplate.html" target="_blank" class="image fit thumb"><img src="images/fulls/expressjs-boilerplate.png" alt="" /></a>
-								<h3>
-									<a href="./projects/personal/expressjs-boilerplate.html" target="_blank">
-										Express.js Boilerplate <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>A lightweight express.js boilerplate built with modern tech for your next side project.</p>
-							</article>
-						</div>
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">about</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-avatar">
+                        <img src="assets/images/avatar.jpg" alt="Siddhanta Gupta" class="avatar-img">
+                    </div>
+                    <div class="about-text terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">cat about.md</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <p>Software Engineer with hands-on experience delivering production-grade web applications.
+                                I bring projects from concept to deployment, combining technical depth with practical
+                                problem-solving.</p>
+                            <p class="mt-md">My expertise spans the full stack—React and Angular on the frontend,
+                                Node.js and Python on the backend, with AWS and Docker powering the infrastructure.
+                                I thrive on architecting systems that are maintainable, scalable, and built to last.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-						<!-- Professional Projects -->
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">projects</h2>
+                </div>
 
-						<h2>Professional Work</h2>
-						<div class="row">
-							<article class="icon col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/browser_ide.html" target="_blank" class="image fit thumb"><img src="images/fulls/browser_ide.png" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/browser_ide.html" target="_blank">
-										Digimaker Web IDE <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>An IDE in browser, with a real-time shell, a code editor with syntax highlighting and intellisense, and a file explorer.</p>
-							</article>
+                <!-- FOSS Projects -->
+                <h3 class="subsection-title"><span class="text-accent">></span> Free and Open Source Software</h3>
+                <div class="grid grid--2 mb-lg">
+                    <!-- Windows Workspaces -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">windows-workspaces</span>
+                            <span class="badge badge--foss">FOSS</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Windows Workspaces</h4>
+                            <p class="project-desc">Productivity tool that brings i3wm-style tiling window management
+                                and keyboard-driven workflows to Windows users.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">AutoHotKey</span>
+                                <span class="badge">Windows</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/ar_apps.html" target="_blank" class="image fit thumb"><img src="images/thumbs/ar_apps_thumb.png" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/ar_apps.html" target="_blank">
-										AR Treasure Hunt <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>An Augmented Reality Treasure Hunt game prototype to demo Augmeted Reality at Comex 2022 held in Oman.</p>
-							</article>
+                    <!-- Express.js Boilerplate -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">expressjs-boilerplate</span>
+                            <span class="badge badge--foss">FOSS</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Express.js Boilerplate</h4>
+                            <p class="project-desc">Production-ready Express.js starter template with authentication,
+                                database integration, and modern development tooling pre-configured.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Node.js</span>
+                                <span class="badge">Express.js</span>
+                                <span class="badge">MongoDB</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/xybion.html" target="_blank" class="image fit thumb"><img src="images/fulls/xybion.jpg" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/xybion.html" target="_blank">
-										Xybion's Pristima web app reskinning <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>Web reskinning of a desktop app that record animal experimentation data by scientists in medical field.</p>
-							</article>
+                <!-- Professional Projects -->
+                <h3 class="subsection-title"><span class="text-accent">></span> Professional Work</h3>
+                <div class="grid grid--3">
+                    <!-- Digimaker Web IDE -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">digimaker-ide</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Digimaker Web IDE</h4>
+                            <p class="project-desc">Full-featured browser IDE with real-time terminal access,
+                                syntax-highlighted
+                                code editor, and cloud-based file management—deployed on AWS infrastructure.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">React</span>
+                                <span class="badge">Node.js</span>
+                                <span class="badge">MongoDB</span>
+                                <span class="badge">AWS</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/virtual_pt.html" target="_blank" class="image fit thumb"><img src="images/fulls/dr_reddy.jpg" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/virtual_pt.html" target="_blank">
-										Dr. Reddy's Healify Virtual PT <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>Python Mediapipe module to analyze pose and hand positioning for correct exercise form.</p>
-							</article>
+                    <!-- AR Treasure Hunt -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">ar-treasure-hunt</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">AR Treasure Hunt</h4>
+                            <p class="project-desc">Location-based AR mobile game with geofenced collectibles,
+                                showcased at Comex 2022 in Oman.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Unity</span>
+                                <span class="badge">AR</span>
+                                <span class="badge">C#</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/isl_document_repository.html" target="_blank" class="image fit thumb"><img src="images/fulls/hero_isl_logo.jpg" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/isl_document_repository.html" target="_blank">
-										ISL Document Repository <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>Fork of MayanEDMS that acts as a document store for the Indian Super League.</p>
-							</article>
+                    <!-- Xybion Pristima -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">xybion-pristima</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Xybion's Pristima Reskin</h4>
+                            <p class="project-desc">Angular-based modernization of a legacy desktop application for
+                                preclinical research data management in pharmaceutical settings.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Web</span>
+                                <span class="badge">UI/UX</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/elearning_course_creator.html" target="_blank" class="image fit thumb"><img src="images/fulls/h5p_logo.jpg" alt="" /></a>
-								<h3>
-									<a href="./projects/professional/elearning_course_creator.html" target="_blank">
-										iCog LMS course creator <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>A fork of lumieducation/h5p to create courses for any LMS compliant with SCORM and xAPI.</p>
-							</article>
+                    <!-- Dr. Reddy's Healify -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">healify-virtual-pt</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Dr. Reddy's Healify Virtual PT</h4>
+                            <p class="project-desc">Computer vision module leveraging MediaPipe for real-time pose
+                                analysis
+                                and exercise form validation.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Python</span>
+                                <span class="badge">MediaPipe</span>
+                                <span class="badge">CV</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/navigator.html" target="_blank" class="image fit thumb"><img src="images/fulls/navigator.png" alt=""/></a>
-								<h3>
-									<a href="./projects/professional/navigator.html" target="_blank">
-										Navigator's OAuth2 Authorization Server <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>An auth server for all the internal tools of the company built using OAuth2 and OpenID Connect protocols.</p>
-							</article>
+                    <!-- ISL Document Repository -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">isl-doc-repo</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">ISL Document Repository</h4>
+                            <p class="project-desc">Fork of MayanEDMS customized for the Indian Super League,
+                                handling player contracts and team documentation with role-based access control.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Python</span>
+                                <span class="badge">Django</span>
+                                <span class="badge">Docker</span>
+                            </div>
+                        </div>
+                    </article>
 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="./projects/professional/formly_v2.html" target="_blank" class="image fit thumb"><img src="images/fulls/formly.png" alt=""/></a>
-								<h3>
-									<a href="./projects/professional/formly_v2.html" target="_blank">
-										Formly 2.0 <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>Rewrite of a legacy web application with modern Architecture and Stack.</p>
-							</article>
-						</div>
+                    <!-- iCog LMS Course Creator -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">icog-lms</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">iCog LMS Course Creator</h4>
+                            <p class="project-desc">Extended H5P-based course authoring platform with enhanced video
+                                interactions, enabling SCORM/xAPI-compliant content for enterprise LMS platforms.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">JavaScript</span>
+                                <span class="badge">H5P</span>
+                                <span class="badge">SCORM</span>
+                            </div>
+                        </div>
+                    </article>
 
-						<!-- Blogs -->
+                    <!-- Navigator Auth Server -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">navigator-auth</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Navigator OAuth2 Auth Server</h4>
+                            <p class="project-desc">Centralized authentication server implementing OAuth2/OIDC
+                                standards,
+                                providing SSO across all internal applications.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">Nest.js</span>
+                                <span class="badge">MySQL</span>
+                                <span class="badge">OAuth2</span>
+                            </div>
+                        </div>
+                    </article>
 
-						<h2>Blogs</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="/blogs/how_to_use_websockets_like_a_pro.html" target="_blank" class="image fit thumb"><img src="images/fulls/web_sockets.jpg" alt="" /></a>
-								<h3>
-									<a href="/blogs/how_to_use_websockets_like_a_pro.html" target="_blank">
-										How to use WebSockets like a pro <img src="images/icons/open_new_tab_icon.svg" class="new-tab-icon" />
-									</a>
-								</h3>
-								<p>A collection of tips and tricks for using websockets more effectively that I observed while working with them.</p>
-							</article>
-						</div>
+                    <!-- Formly 2.0 -->
+                    <article class="project-card terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">formly-v2</span>
+                            <span class="badge badge--pro">PRO</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <h4 class="project-title">Formly 2.0</h4>
+                            <p class="project-desc">Ground-up rebuild of legacy web application using React, TypeScript,
+                                and containerized microservices architecture.</p>
+                            <div class="project-tech mt-md">
+                                <span class="badge">JavaScript</span>
+                                <span class="badge">Modern Stack</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-					</section>
-				<!-- Three -->
-					<section id="three">
-						<h2>Skills</h2>
-						<div class="skills">
-							<a class="button small skill">JavaScript ES6</a>
-							<a class="button small skill">React</a>
-							<a class="button small skill">Angular</a>
-							<a class="button small skill">AWS</a>
-							<a class="button small skill">Python</a>
-							<a class="button small skill">Django</a>
-							<a class="button small skill">Node.js</a>
-							<a class="button small skill">Express.js</a>
-							<a class="button small skill">Docker</a>
-							<a class="button small skill">SQL</a>
-							<a class="button small skill">MongoDB</a>
-							<a class="button small skill">Redis</a>
-							<a class="button small skill">HTML5</a>
-							<a class="button small skill">CSS3</a>
-							<a class="button small skill">Wordpress</a>
-						</div>
-					</section>
+        <!-- Skills Section -->
+        <section class="skills" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">skills</h2>
+                </div>
+                <div class="skills-grid grid grid--2">
+                    <!-- Frontend -->
+                    <div class="skill-category terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">ls frontend/</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <ul class="skill-list">
+                                <li class="skill-item"><span class="text-accent">></span> JavaScript ES6+</li>
+                                <li class="skill-item"><span class="text-accent">></span> React</li>
 
-				<!-- Four -->
-					<section id="four">
-						<h2>Get In Touch</h2>
-						<p>Drop me an e-mail if you want me to build a webapp. And if not, don't hesitate to say Hi or ask any question. My inbox is always open.</p>
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<span>siddhanta.sg@gmail.com</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-			</div>
+                                <li class="skill-item"><span class="text-accent">></span> HTML5 / CSS3</li>
+                            </ul>
+                        </div>
+                    </div>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="https://github.com/SiddhantaGupta" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
-						<li><a href="mailto:siddhanta.sg@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						<li><span class="label">siddhanta.sg@gmail.com</span></li>
-					</ul>
-				</div>
-			</footer>
+                    <!-- Backend -->
+                    <div class="skill-category terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">ls backend/</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <ul class="skill-list">
+                                <li class="skill-item"><span class="text-accent">></span> Node.js</li>
+                                <li class="skill-item"><span class="text-accent">></span> Express.js</li>
+                                <li class="skill-item"><span class="text-accent">></span> Python</li>
+                                <li class="skill-item"><span class="text-accent">></span> Django</li>
+                            </ul>
+                        </div>
+                    </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                    <!-- Database -->
+                    <div class="skill-category terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">ls database/</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <ul class="skill-list">
+                                <li class="skill-item"><span class="text-accent">></span> SQL</li>
+                                <li class="skill-item"><span class="text-accent">></span> MongoDB</li>
+                                <li class="skill-item"><span class="text-accent">></span> Redis</li>
+                            </ul>
+                        </div>
+                    </div>
 
-	</body>
+                    <!-- DevOps & Cloud -->
+                    <div class="skill-category terminal-card">
+                        <div class="terminal-card-header">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-card-title">ls devops/</span>
+                        </div>
+                        <div class="terminal-card-body">
+                            <ul class="skill-list">
+                                <li class="skill-item"><span class="text-accent">></span> AWS</li>
+                                <li class="skill-item"><span class="text-accent">></span> Docker</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">contact</h2>
+                </div>
+                <div class="contact-content terminal-card">
+                    <div class="terminal-card-header">
+                        <div class="terminal-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="terminal-card-title">echo "Get in touch"</span>
+                    </div>
+                    <div class="terminal-card-body">
+                        <p class="contact-intro">I'm open to discussing new opportunities, technical challenges, or
+                            interesting projects. Whether it's a collaboration or just a conversation—let's connect.</p>
+                        <div class="contact-links mt-lg">
+                            <a href="mailto:siddhanta.sg@gmail.com" class="contact-link">
+                                <span class="prompt">mail</span> siddhanta.sg@gmail.com
+                            </a>
+                            <a href="https://github.com/SiddhantaGupta" target="_blank" rel="noopener"
+                                class="contact-link">
+                                <span class="prompt">git</span> clone github.com/SiddhantaGupta
+                            </a>
+                            <a href="https://www.linkedin.com/in/siddhantagupta" target="_blank" rel="noopener"
+                                class="contact-link">
+                                <span class="prompt">curl</span> linkedin.com/in/siddhantagupta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">
+                <span class="text-muted">$</span> echo "Crafted from scratch with vanilla HTML, CSS, and JavaScript"
+            </p>
+            <p class="footer-copyright text-muted">© 2026 Siddhanta Gupta</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/main.js"></script>
+</body>
+
 </html>
