@@ -1,99 +1,76 @@
-/* Resume Page Styles - Terminal Inspired Theme */
+/* ══════════════════════════════════════════
+   Resume Page — TUI Aesthetic (standalone)
+   ══════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-    --bg-primary: #0d0d0d;
-    --bg-secondary: #1a1a2e;
-    --bg-tertiary: #16213e;
-    --border: #2d2d4a;
-    --border-glow: #4a4a6a;
+    --bg:           #0a0a0f;
+    --surface:      #12121a;
+    --surface-2:    #1a1a24;
+    --border:       #252532;
+    --border-hover: #3a3a50;
 
-    --text-primary: #e0e0e0;
-    --text-muted: #8888aa;
-    --text-dim: #555566;
+    --text:         #cdd6f4;
+    --subtext:      #a6adc8;
+    --muted:        #6c7086;
+    --dim:          #45475a;
 
-    --accent-cyan: #7dd3fc;
-    --accent-green: #4ade80;
-    --accent-purple: #c084fc;
-    --accent-yellow: #fbbf24;
+    --red:          #f38ba8;
+    --green:        #a6e3a1;
+    --yellow:       #f9e2af;
+    --blue:         #89b4fa;
+    --purple:       #cba6f7;
+    --cyan:         #89dceb;
+    --teal:         #94e2d5;
+    --peach:        #fab387;
+    --lavender:     #b4befe;
 
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-2xl: 3rem;
-
-    --max-width: 900px;
-    --transition-fast: 150ms ease;
+    --font-mono: 'JetBrainsMono Nerd Font Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    --t-fast: 120ms ease;
+    --max-w: 900px;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
 }
 
-/* Scanline effect */
-body::before {
+/* Scanline */
+body::after {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.03) 2px,
-            rgba(0, 0, 0, 0.03) 4px);
-    z-index: 1000;
+    background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    z-index: 9999;
 }
 
-a {
-    text-decoration: none;
-    color: var(--accent-cyan);
-    transition: color var(--transition-fast);
-}
+::selection { background: var(--purple); color: var(--bg); }
 
-a:hover {
-    color: var(--accent-purple);
-}
+a { text-decoration: none; color: var(--blue); transition: color var(--t-fast); }
+a:hover { color: var(--lavender); }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
 
-ul {
-    list-style: none;
-}
-
-/* Header */
+/* ─── Header ──────────────────────────── */
 .resume-header {
     position: sticky;
     top: 0;
-    background: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(8px);
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: var(--space-md) var(--space-xl);
+    padding: 8px 24px;
     z-index: 100;
 }
 
 .resume-header-inner {
-    max-width: var(--max-width);
+    max-width: var(--max-w);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -101,106 +78,86 @@ ul {
 }
 
 .back-home {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-size: 12px;
+    color: var(--muted);
+    transition: color var(--t-fast);
 }
 
-.back-home:hover {
-    color: var(--accent-cyan);
-}
+.back-home:hover { color: var(--cyan); }
 
 .download-btn {
-    font-size: 0.85rem;
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--accent-green);
-    border-radius: 4px;
-    color: var(--accent-green);
-    transition: all var(--transition-fast);
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid var(--green);
+    color: var(--green);
+    transition: all var(--t-fast);
 }
 
 .download-btn:hover {
-    background: var(--accent-green);
-    color: var(--bg-primary);
+    background: var(--green);
+    color: var(--bg);
 }
 
-.prompt {
-    color: var(--accent-green);
+.download-btn:hover .prompt {
+    color: var(--bg);
 }
 
-/* Container */
+.prompt { color: var(--green); }
+
+/* ─── Container ───────────────────────── */
 .resume-container {
-    max-width: var(--max-width);
+    max-width: var(--max-w);
     margin: 0 auto;
-    padding: var(--space-2xl) var(--space-xl);
+    padding: 40px 24px;
 }
 
-/* Hero Section */
+/* ─── Hero ────────────────────────────── */
 .resume-hero {
     text-align: center;
-    margin-bottom: var(--space-2xl);
-    padding-bottom: var(--space-xl);
+    margin-bottom: 40px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
 }
 
 .resume-name {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    color: var(--text);
+    margin-bottom: 4px;
 }
 
 .resume-title {
-    font-size: 1.1rem;
-    color: var(--accent-cyan);
-    margin-bottom: var(--space-md);
+    font-size: 1rem;
+    color: var(--cyan);
+    margin-bottom: 16px;
 }
 
-.resume-contact {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-xl);
-    flex-wrap: wrap;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.text-accent {
-    color: var(--accent-cyan);
-}
-
-.text-muted {
-    color: var(--text-muted);
-}
-
-/* Sections */
-.resume-section {
-    margin-bottom: var(--space-2xl);
-}
+/* ─── Sections ────────────────────────── */
+.resume-section { margin-bottom: 40px; }
 
 .section-heading {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--accent-cyan);
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-sm);
+    color: var(--cyan);
+    margin-bottom: 20px;
+    padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
 }
 
 .section-heading::before {
     content: '## ';
-    color: var(--text-muted);
+    color: var(--dim);
 }
 
 /* Terminal Block */
 .terminal-block {
-    background: var(--bg-secondary);
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-lg);
+    padding: 20px;
 }
 
 .terminal-block p {
-    color: var(--text-primary);
+    color: var(--subtext);
     line-height: 1.7;
 }
 
@@ -208,172 +165,139 @@ ul {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    gap: 12px;
 }
 
 .skill-group {
-    background: var(--bg-secondary);
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-md);
+    padding: 12px;
 }
 
 .skill-category {
-    font-size: 0.85rem;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--accent-purple);
-    margin-bottom: var(--space-sm);
+    color: var(--purple);
+    margin-bottom: 4px;
 }
 
 .skill-category::before {
     content: '> ';
-    color: var(--accent-green);
+    color: var(--green);
 }
 
 .skill-group p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: 12px;
+    color: var(--muted);
     line-height: 1.5;
 }
 
 /* Experience Cards */
 .experience-card {
-    background: var(--bg-secondary);
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-lg);
-    margin-bottom: var(--space-md);
-    transition: border-color var(--transition-fast);
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: border-color var(--t-fast);
 }
 
-.experience-card:hover {
-    border-color: var(--border-glow);
-}
+.experience-card:hover { border-color: var(--border-hover); }
 
 .experience-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
+    gap: 6px;
+    margin-bottom: 6px;
 }
 
 .experience-title {
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text);
 }
 
 .experience-tech {
-    font-size: 0.75rem;
-    color: var(--accent-yellow);
-    background: rgba(251, 191, 36, 0.1);
+    font-size: 11px;
+    color: var(--yellow);
+    background: rgba(249, 226, 175, 0.08);
     padding: 2px 8px;
-    border-radius: 3px;
 }
 
 .experience-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: var(--space-md);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
 }
 
-.experience-list {
-    padding-left: var(--space-md);
-}
+.experience-list { padding-left: 16px; }
 
 .experience-list li {
-    font-size: 0.85rem;
-    color: var(--text-primary);
-    margin-bottom: var(--space-sm);
-    padding-left: var(--space-sm);
+    font-size: 12px;
+    color: var(--subtext);
+    margin-bottom: 4px;
+    padding-left: 8px;
     position: relative;
+    line-height: 1.6;
 }
 
 .experience-list li::before {
     content: '>';
     position: absolute;
-    left: calc(-1 * var(--space-md));
-    color: var(--accent-green);
+    left: -16px;
+    color: var(--green);
 }
 
-/* Footer */
+/* ─── Footer ──────────────────────────── */
 .resume-footer {
     text-align: center;
-    padding-top: var(--space-xl);
+    padding-top: 24px;
     border-top: 1px solid var(--border);
 }
 
 .download-btn-large {
     display: inline-block;
-    padding: var(--space-md) var(--space-xl);
-    background: var(--accent-green);
-    color: var(--bg-primary);
+    padding: 12px 24px;
+    background: var(--green);
+    color: var(--bg);
     font-weight: 600;
-    border-radius: 4px;
-    margin-bottom: var(--space-md);
-    transition: all var(--transition-fast);
+    margin-bottom: 12px;
+    transition: all var(--t-fast);
 }
 
 .download-btn-large:hover {
-    background: var(--accent-cyan);
-    color: var(--bg-primary);
+    background: var(--cyan);
+    color: var(--bg);
 }
 
-/* Responsive */
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--cyan); }
+
+/* ─── Responsive ──────────────────────── */
 @media (max-width: 768px) {
-    .resume-container {
-        padding: var(--space-lg) var(--space-md);
-    }
-
-    .resume-name {
-        font-size: 1.5rem;
-    }
-
-    .resume-contact {
-        flex-direction: column;
-        gap: var(--space-sm);
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .experience-header {
-        flex-direction: column;
-    }
-
-    .resume-header-inner {
-        flex-direction: column;
-        gap: var(--space-md);
-    }
+    .resume-container { padding: 20px 16px; }
+    .resume-name { font-size: 1.3rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .experience-header { flex-direction: column; }
+    .resume-header-inner { flex-direction: column; gap: 8px; }
 }
 
-/* Print styles for clean PDF-like appearance */
+/* ─── Print ───────────────────────────── */
 @media print {
-    body::before {
-        display: none;
-    }
+    body::after { display: none; }
+    .resume-header { display: none; }
+    .resume-footer .download-btn-large { display: none; }
+    body { background: white; color: #333; font-size: 11px; }
 
-    .resume-header {
-        display: none;
-    }
-
-    .resume-footer .download-btn-large {
-        display: none;
-    }
-
-    body {
-        background: white;
-        color: #333;
-    }
-
-    .resume-section,
-    .terminal-block,
-    .skill-group,
-    .experience-card {
+    .resume-section, .terminal-block, .skill-group, .experience-card {
         background: white;
         border-color: #ddd;
     }
+
+    .section-heading { color: #333; }
+    .section-heading::before { color: #999; }
+    .skill-category { color: #555; }
+    .experience-title { color: #333; }
+    .experience-tech { color: #666; background: #f5f5f5; }
 }
