@@ -125,6 +125,7 @@ const COMMANDS = {
     projects: () => [
         '<span class="hl-comment">$ ls -la ~/projects/</span>',
         '',
+        '<span class="hl-showcase">LIVE</span>  software-renderer      C/SDL3 → WebAssembly renderer',
         '<span class="hl-foss">FOSS</span>  windows-workspaces     i3wm for Windows',
         '<span class="hl-foss">FOSS</span>  expressjs-boilerplate  Production Node starter',
         '<span class="hl-foss">FOSS</span>  advent-of-code         Programming challenges',
@@ -225,8 +226,9 @@ const COMMANDS = {
     ls: (args) => {
         const target = (args[0] || '.').replace(/\/$/, '');
         const dirs = {
-            '.':          'about.md  projects/  skills.toml  contact.md  resume.pdf',
+            '.':          'about.md  projects/  showcase/  skills.toml  contact.md  resume.pdf',
             'projects':   'windows-workspaces/  expressjs-boilerplate/  digimaker-ide/\nnavigator-auth/  icog-lms/  ar-treasure-hunt/  healify-virtual-pt/\nisl-doc-repo/  formly-v2/  advent-of-code/',
+            'showcase':   'software-renderer/',
         };
         return dirs[target] || `ls: cannot access '${args[0]}': No such file or directory`;
     },

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Renderer — Siddhanta Gupta</title>
+    <meta name="description"
+        content="Custom C/SDL3 software renderer compiled to WebAssembly. Interactive 3D rendering with real-time shader controls.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════════
+           Design Tokens — Catppuccin Mocha + TUI
+           (Inlined for standalone showcase page)
+           ══════════════════════════════════════════ */
+        :root {
+            --bg:           #0a0a0f;
+            --surface:      #12121a;
+            --surface-2:    #1a1a24;
+            --overlay:      #1e1e2e;
+            --border:       #252532;
+            --border-hover: #3a3a50;
+            --border-focus: #585878;
+            --text:         #cdd6f4;
+            --subtext:      #a6adc8;
+            --muted:        #6c7086;
+            --dim:          #45475a;
+            --red:          #f38ba8;
+            --green:        #a6e3a1;
+            --yellow:       #f9e2af;
+            --blue:         #89b4fa;
+            --purple:       #cba6f7;
+            --cyan:         #89dceb;
+            --teal:         #94e2d5;
+            --pink:         #f5c2e7;
+            --peach:        #fab387;
+            --lavender:     #b4befe;
+            --accent:       var(--cyan);
+            --font-mono:    'JetBrainsMono Nerd Font Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        /* ─── Reset ─────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CRT scanline */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg, transparent 0px, transparent 2px,
+                rgba(0, 0, 0, 0.04) 2px, rgba(0, 0, 0, 0.04) 4px
+            );
+            z-index: 9999;
+        }
+
+        ::selection {
+            background: var(--purple);
+            color: var(--bg);
+        }
+
+        a { color: var(--blue); text-decoration: none; transition: color 150ms ease; }
+        a:hover { color: var(--lavender); }
+
+        /* ─── Top Bar ───────────────────────── */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            height: 36px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .top-bar__left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .top-bar__session {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .top-bar__breadcrumb {
+            color: var(--muted);
+        }
+
+        .top-bar__breadcrumb a {
+            color: var(--blue);
+        }
+
+        .top-bar__breadcrumb .sep {
+            color: var(--dim);
+            margin: 0 0.25rem;
+        }
+
+        .top-bar__right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .top-bar__back {
+            color: var(--yellow);
+            transition: color 150ms ease;
+        }
+
+        .top-bar__back:hover {
+            color: var(--peach);
+        }
+
+        .top-bar__git {
+            color: var(--green);
+            transition: color 150ms ease;
+        }
+
+        .top-bar__git:hover {
+            color: var(--cyan);
+        }
+
+        /* ─── Main Layout ───────────────────── */
+        .showcase-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 1.5rem;
+        }
+
+        /* ─── Title Area ────────────────────── */
+        .showcase-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .showcase-header__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .showcase-header__title .hash {
+            color: var(--dim);
+            font-weight: 400;
+        }
+
+        .showcase-header__subtitle {
+            font-size: 0.8125rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .showcase-header__tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 1px 0.5rem;
+            border: 1px solid var(--dim);
+            color: var(--muted);
+            transition: all 120ms ease;
+        }
+
+        .tag:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* ─── Renderer Pane ─────────────────── */
+        .renderer-pane {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: border-color 200ms ease;
+        }
+
+        .renderer-pane:hover {
+            border-color: var(--border-hover);
+        }
+
+        .renderer-pane__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.25rem 0.75rem;
+            background: var(--surface-2);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            min-height: 24px;
+        }
+
+        .renderer-pane__title {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .renderer-pane__status {
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .renderer-pane__status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .renderer-pane__body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+            z-index: 10000;
+            min-height: 400px;
+        }
+
+        /* Loading state */
+        .renderer-pane__loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: #000;
+            z-index: 10;
+            transition: opacity 400ms ease;
+        }
+
+        .renderer-pane__loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--dim);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--muted);
+            font-size: 0.8125rem;
+            font-family: var(--font-mono);
+        }
+
+        .loading-text .blink {
+            animation: blink-cursor 1s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+            50% { opacity: 0; }
+        }
+
+        /* Canvas */
+        #canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .controls-panel {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 20;
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            min-width: 170px;
+        }
+
+        .controls-panel__header {
+            display: flex;
+            align-items: center;
+            padding: 0.2rem 0.625rem;
+            background: rgba(26, 26, 36, 0.9);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.6875rem;
+            min-height: 22px;
+        }
+
+        .controls-panel__title {
+            color: var(--subtext);
+            font-weight: 600;
+        }
+
+        .controls-panel__body {
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        /* ─── Shader Toggle (compact) ──────────── */
+        .shader-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.5rem;
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 200ms ease;
+            user-select: none;
+        }
+
+        .shader-toggle:hover {
+            background: rgba(10, 10, 15, 0.8);
+            border-color: var(--border-hover);
+        }
+
+        .shader-toggle.active {
+            border-color: rgba(137, 220, 235, 0.3);
+            background: rgba(137, 220, 235, 0.06);
+        }
+
+        .shader-toggle__switch {
+            position: relative;
+            width: 28px;
+            height: 14px;
+            background: var(--dim);
+            border-radius: 7px;
+            transition: background 200ms ease;
+            flex-shrink: 0;
+        }
+
+        .shader-toggle.active .shader-toggle__switch {
+            background: var(--cyan);
+        }
+
+        .shader-toggle__switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 10px;
+            height: 10px;
+            background: var(--bg);
+            border-radius: 50%;
+            transition: transform 200ms ease;
+        }
+
+        .shader-toggle.active .shader-toggle__switch::after {
+            transform: translateX(14px);
+        }
+
+        .shader-toggle__info {
+            display: flex;
+            align-items: center;
+        }
+
+        .shader-toggle__name {
+            font-size: 0.75rem;
+            color: var(--subtext);
+            font-weight: 500;
+        }
+
+        .shader-toggle.active .shader-toggle__name {
+            color: var(--cyan);
+        }
+
+        .controls-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.5rem 0;
+        }
+
+        .rotation-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rotation-control:last-child {
+            margin-bottom: 0;
+        }
+
+        .rotation-control__header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--subtext);
+        }
+
+        .rotation-control__val {
+            color: var(--cyan);
+        }
+
+        .rotation-control input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            margin: 0.25rem 0;
+        }
+
+        .rotation-control input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+        }
+
+        .rotation-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 8px;
+            background: var(--cyan);
+            border-radius: 2px;
+            margin-top: -4px;
+            cursor: pointer;
+        }
+        
+        .rotation-control input[type="range"]:focus {
+            outline: none;
+        }
+
+        /* ─── Info Footer ───────────────────── */
+        .showcase-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--dim);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .showcase-info__left {
+            color: var(--muted);
+        }
+
+        .showcase-info__right {
+            color: var(--dim);
+        }
+
+        /* ─── Responsive ────────────────────── */
+        @media (max-width: 768px) {
+            .showcase-main {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .renderer-pane__body {
+                flex-direction: column;
+                min-height: unset;
+            }
+
+            .controls-panel {
+                position: relative;
+                width: 100%;
+                top: auto;
+                transform: none;
+                left: auto;
+                right: auto;
+                bottom: auto;
+                min-width: unset;
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+                border-top: 1px solid var(--border);
+            }
+
+            .controls-panel__body {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .top-bar__breadcrumb {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar__right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ═══ Top Bar ═══ -->
+    <header class="top-bar">
+        <div class="top-bar__left">
+            <span class="top-bar__session">[0] siddhanta@portfolio</span>
+            <span class="top-bar__breadcrumb">
+                <a href="../../index.html">~</a>
+                <span class="sep">/</span>
+                <span>showcase</span>
+                <span class="sep">/</span>
+                <span>software-renderer</span>
+            </span>
+        </div>
+        <div class="top-bar__right">
+            <a href="https://github.com/SiddhantaGupta/software_renderer" target="_blank" rel="noopener" class="top-bar__git">View Source ↗</a>
+            <a href="../../index.html#projects" class="top-bar__back">← back to portfolio</a>
+        </div>
+    </header>
+
+    <!-- ═══ Main Content ═══ -->
+    <main class="showcase-main">
+        <!-- Title -->
+        <div class="showcase-header">
+            <h1 class="showcase-header__title">
+                <span class="hash">## </span>software-renderer
+            </h1>
+            <p class="showcase-header__subtitle">
+                3D software renderer in C.
+            </p>
+            <div class="showcase-header__tech">
+                <span class="tag">C</span>
+                <span class="tag">WebAssembly</span>
+                <span class="tag">Emscripten</span>
+                <span class="tag">Software Rendering</span>
+            </div>
+        </div>
+
+        <!-- Renderer Canvas -->
+        <div class="renderer-pane">
+            <div class="renderer-pane__header">
+                <span class="renderer-pane__title">renderer-canvas</span>
+                <span class="renderer-pane__status" id="renderer-status">loading</span>
+            </div>
+            <div class="renderer-pane__body">
+                <div class="renderer-pane__loading" id="renderer-loading">
+                    <div class="loading-spinner"></div>
+                    <span class="loading-text">
+                        $ loading engine.wasm<span class="blink">_</span>
+                    </span>
+                </div>
+                <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+
+                <!-- Shader Controls — overlaid on canvas -->
+                <div class="controls-panel">
+                    <div class="controls-panel__header">
+                        <span class="controls-panel__title">shader-controls</span>
+                    </div>
+                    <div class="controls-panel__body">
+                        <div class="shader-toggle active" id="toggle-shadow" data-mask="0x00000002" data-bit="2">
+                            <div class="shader-toggle__switch"></div>
+                            <div class="shader-toggle__info">
+                                <span class="shader-toggle__name">Shadows</span>
+                            </div>
+                        </div>
+
+                        <div class="shader-toggle active" id="toggle-ao" data-mask="0x00000004" data-bit="4">
+                            <div class="shader-toggle__switch"></div>
+                            <div class="shader-toggle__info">
+                                <span class="shader-toggle__name">Ambient Occlusion</span>
+                            </div>
+                        </div>
+
+                        <div class="shader-toggle active" id="toggle-toon" data-mask="0x00000008" data-bit="8">
+                            <div class="shader-toggle__switch"></div>
+                            <div class="shader-toggle__info">
+                                <span class="shader-toggle__name">Toon Shading</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls-panel__header" style="border-top: 1px solid var(--border);">
+                        <span class="controls-panel__title">rotation-controls</span>
+                    </div>
+                    <div class="controls-panel__body">
+                        <div class="rotation-control">
+                            <div class="rotation-control__header">
+                                <span>X Rot</span>
+                                <span class="rotation-control__val" id="rot-x-val">0</span>
+                            </div>
+                            <input type="range" id="rot-x" min="0" max="360" step="1" value="0">
+                        </div>
+                        
+                        <div class="rotation-control">
+                            <div class="rotation-control__header">
+                                <span>Y Rot</span>
+                                <span class="rotation-control__val" id="rot-y-val">0</span>
+                            </div>
+                            <input type="range" id="rot-y" min="0" max="360" step="1" value="0">
+                        </div>
+                        
+                        <div class="rotation-control">
+                            <div class="rotation-control__header">
+                                <span>Z Rot</span>
+                                <span class="rotation-control__val" id="rot-z-val">0</span>
+                            </div>
+                            <input type="range" id="rot-z" min="0" max="360" step="1" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ═══ Bottom Bar ═══ -->
+    <footer class="showcase-info">
+        <span class="showcase-info__left">C → Emscripten → WebAssembly · No GPU — pure software rendering</span>
+        <span class="showcase-info__right">© 2026 Siddhanta Gupta</span>
+    </footer>
+
+    <!-- ═══ Engine Loader ═══ -->
+    <script>
+        var loadingEl = document.getElementById('renderer-loading');
+        var statusEl = document.getElementById('renderer-status');
+        var canvasElement = document.getElementById('canvas');
+
+        // Handle WebGL context loss gracefully
+        canvasElement.addEventListener('webglcontextlost', function (e) {
+            alert('WebGL context lost. You will need to reload the page.');
+            e.preventDefault();
+        }, false);
+
+        // Status display callback for Emscripten's loading pipeline
+        var setStatus = function (text) {
+            if (!text) {
+                // All done loading
+                if (loadingEl) loadingEl.classList.add('hidden');
+                if (statusEl) statusEl.textContent = 'running';
+            } else if (statusEl) {
+                statusEl.textContent = 'loading';
+            }
+        };
+
+        // Configure Emscripten Module BEFORE engine.js loads
+        // Module.canvas is the critical property — Emscripten uses it to find the render target
+        var Module = {
+            canvas: canvasElement,
+            setStatus: setStatus,
+            totalDependencies: 0,
+            monitorRunDependencies: function (left) {
+                this.totalDependencies = Math.max(this.totalDependencies, left);
+                if (left) {
+                    setStatus('Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')');
+                } else {
+                    setStatus('');
+                }
+            }
+        };
+
+        setStatus('Downloading...');
+
+        // Shader toggle logic
+        var toggles = document.querySelectorAll('.shader-toggle');
+        toggles.forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
+                var isActive = toggle.classList.toggle('active');
+                var mask = parseInt(toggle.dataset.bit, 10);
+
+                if (Module.ccall) {
+                    Module.ccall(
+                        'toggle_shader_flag',
+                        null,
+                        ['number', 'number'],
+                        [mask, isActive ? 1 : 0]
+                    );
+                }
+            });
+        });
+
+        // Rotation logic
+        function updateSceneRotation(x, y, z) {
+            if (Module.ccall) {
+                Module.ccall(
+                    'set_scene_rotation',
+                    null,
+                    ['number', 'number', 'number'],
+                    [x, y, z]
+                );
+            }
+        }
+
+        var rotX = document.getElementById('rot-x');
+        var rotY = document.getElementById('rot-y');
+        var rotZ = document.getElementById('rot-z');
+        var rotXVal = document.getElementById('rot-x-val');
+        var rotYVal = document.getElementById('rot-y-val');
+        var rotZVal = document.getElementById('rot-z-val');
+
+        function onRotationChange() {
+            var x = parseInt(rotX.value, 10);
+            var y = parseInt(rotY.value, 10);
+            var z = parseInt(rotZ.value, 10);
+            
+            rotXVal.textContent = x;
+            rotYVal.textContent = y;
+            rotZVal.textContent = z;
+            
+            updateSceneRotation(x, y, z);
+        }
+
+        rotX.addEventListener('input', onRotationChange);
+        rotY.addEventListener('input', onRotationChange);
+        rotZ.addEventListener('input', onRotationChange);
+    </script>
+    <script src="engine.js" async></script>
+</body>
+
+</html>

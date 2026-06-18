@@ -327,6 +327,7 @@ main {
 .terminal-line .hl-role    { color: var(--subtext); }
 .terminal-line .hl-foss    { color: var(--green); }
 .terminal-line .hl-pro     { color: var(--purple); }
+.terminal-line .hl-showcase { color: var(--peach); }
 .terminal-line .hl-link    { color: var(--blue); text-decoration: underline; cursor: pointer; }
 .terminal-line .hl-link:hover { color: var(--lavender); }
 
@@ -358,6 +359,7 @@ main {
     font-family: var(--font-mono);
     font-size: var(--fs-sm);
     caret-color: var(--green);
+    caret-shape: block;
     padding: 0;
     line-height: 1.6;
 }
@@ -621,6 +623,83 @@ main {
 
 .project-card__link:hover {
     color: var(--cyan);
+}
+
+/* ─── Showcase Badge + View Button ────── */
+.projects-group__title .marker--showcase { color: var(--peach); }
+.project-card__badge--showcase { color: var(--peach); }
+
+.project-card__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.project-card__view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 200ms ease;
+    text-decoration: none;
+    align-self: flex-start;
+}
+
+.project-card__view-btn:hover {
+    color: var(--text);
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(137, 220, 235, 0.15), inset 0 0 20px rgba(137, 220, 235, 0.03);
+    transform: translateY(-1px);
+}
+
+.project-card__view-prompt {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.project-card__view-text {
+    color: var(--peach);
+}
+
+.project-card__view-btn:hover .project-card__view-text {
+    color: var(--yellow);
+}
+
+.project-card__view-arrow {
+    color: var(--cyan);
+    transition: transform 200ms ease;
+    font-size: 0.875rem;
+}
+
+.project-card__view-btn:hover .project-card__view-arrow {
+    transform: translate(2px, -2px);
+}
+
+.project-card__view-cursor {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1em;
+    background-color: var(--cyan);
+    vertical-align: text-bottom;
+    animation: blink-cursor 1s step-end infinite;
+    opacity: 0.8;
+}
+
+.project-card__view-btn:hover .project-card__view-cursor {
+    background-color: var(--yellow);
+}
+
+@keyframes blink-cursor {
+    50% { opacity: 0; }
 }
 
 /* ─── Skills (TOML config style) ──────── */
